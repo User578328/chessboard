@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Šachovnice</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a202c;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+        }
+
+        .black {
+            background-color: #000;
+        }
+
+        .white {
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Šachovnice</h1>
+    <div id="inputs">
+        <input type="number" placeholder="Šířka" id="width">
+        <input type="number" placeholder="Výška" id="height">
+        <button id="generate">Vygenerovat šachovnici</button>
+    </div>
+    <div id="chessboard"></div>
+
+    <script>
+        const generateButton = document.getElementById("generate");
+        const widthInput = document.getElementById("width");
+        const heightInput = document.getElementById("height");
+        const chessboardDiv = document.getElementById("chessboard");
+
+        generateButton.addEventListener("click", () => {
+            const width = widthInput.value;
+            const height = heightInput.value;
+
+            if (width && height) {
+                const table = document.createElement("table");
+
+                for (let i = 0; i < height; i++) {
+                    const row = document.createElement("tr");
+
+                    for (let j = 0; j < width; j++) {
+                        const cell = document.createElement("td");
+                        const isBlack = (i + j) % 2 === 0;
+                        cell.className = isBlack ? "black" : "white";
+
+                        row.appendChild(cell);
+                    }
+
+                    table.appendChild(row);
+                }
+
+                chessboardDiv.innerHTML = "";
+                chessboardDiv.appendChild(table);
+            }
+        });
+    </script>
+</body>
+</html>
